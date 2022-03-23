@@ -1,6 +1,7 @@
 package diztend.quickrepair.mixin;
 
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.StackReference;
 import net.minecraft.item.*;
@@ -27,20 +28,9 @@ public abstract class ToolItemMixin {
                     return true;
                 } else if (stack.getItem() == otherStack.getItem()) {
                     stack.setDamage(Math.max(stack.getDamage() - otherStack.getMaxDamage() + otherStack.getDamage(), 0));
-                    NbtList enchantmentList = otherStack.getEnchantments();
-                    for (int i = 0; i < enchantmentList.size(); i++) {
-                        //add enchantments
-                    }
                     otherStack.decrement(1);
                     return true;
                 }
-            } else if (otherStack.getItem() == Items.ENCHANTED_BOOK && stack.isEnchantable()) {
-                NbtList enchantmentList = EnchantedBookItem.getEnchantmentNbt(otherStack);
-                for (int i = 0; i < enchantmentList.size(); i++) {
-                    //add enchantments
-                }
-                otherStack.decrement(1);
-                return true;
             }
         }
         return false;
