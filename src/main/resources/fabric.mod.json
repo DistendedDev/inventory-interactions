@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "quickrepair",
+  "version": "${version}",
+  "name": "QuickRepair",
+  "description": "Lets you repair items by right clicking them with their ingredients",
+  "authors": [
+    "Diztend"
+  ],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/quickrepair/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "diztend.quickrepair.client.QuickrepairClient"
+    ],
+    "main": [
+      "diztend.quickrepair.Quickrepair"
+    ]
+  },
+  "mixins": [
+    "quickrepair.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.13.3",
+    "fabric": "*",
+    "minecraft": "1.18.2"
+  }
+}
