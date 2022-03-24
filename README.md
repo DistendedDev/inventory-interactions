@@ -1,4 +1,4 @@
-# quick-repair-mod
+# Quick Repair Mod
 
 A configurable mod that allows you to repair items by right-clicking in the inventory
 
