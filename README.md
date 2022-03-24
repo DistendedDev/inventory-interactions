@@ -6,4 +6,6 @@ A configurable mod that allows you to repair items by right-clicking in the inve
 
 * unit repairing
 * item combining
+  * doesn't currently combine enchantments
 * item naming
+* more coming soon...
