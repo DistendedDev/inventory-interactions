@@ -1,4 +1,4 @@
-# Quick Repair Mod
+# Quick Repair Mod (Fabric)
 
 A configurable mod that allows you to repair items by right-clicking in the inventory
 
