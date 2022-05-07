@@ -17,7 +17,6 @@ public class Config {
     public Config(String fileName, HashMap<String, String> defaultFields) {
         File file = FabricLoader.getInstance().getConfigDir().resolve(fileName).toFile();
         try {
-            boolean endsWithEmptyLine = false;
             if (file.createNewFile()) {
                 Quickrepair.log("config file created");
             }
@@ -27,10 +26,6 @@ public class Config {
                 String[] config = line.split("#")[0].split("=");
                 if (config.length == 2 && !line.startsWith("#")) {
                     configs.put(config[0].trim(), config[1].trim());
-                }
-                if (!scanner.hasNextLine()) {
-                    System.out.println(line);
-                    endsWithEmptyLine = true;
                 }
             }
             scanner.close();
