@@ -1,6 +1,7 @@
 package diztend.quickrepair.mixin;
 
-import diztend.quickrepair.config.ModConfigs;
+import diztend.quickrepair.Quickrepair;
+import diztend.quickrepair.util.RepairMethods;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.StackReference;
 import net.minecraft.item.Item;
@@ -21,22 +22,18 @@ public abstract class ToolItemMixin {
     public boolean onClicked(ItemStack stack, ItemStack otherStack, Slot slot, ClickType clickType, PlayerEntity player, StackReference cursorStackReference) {
         if (clickType == ClickType.RIGHT){
             if (stack.isDamaged()) {
-                if (stack.getItem().canRepair(stack, otherStack) && ModConfigs.DO_UNIT_REPAIR > 0) {
-                    stack.setDamage((int) Math.max(stack.getDamage() - Math.floor(stack.getMaxDamage() * ModConfigs.UNIT_REPAIR_RATE), 0));
-                    otherStack.decrement(1);
-                    return true;
-                } else if (stack.getItem() == otherStack.getItem() && ModConfigs.DO_ITEM_COMBINE > 0) {
-                    if (!stack.hasEnchantments() && !otherStack.hasEnchantments()){
-                        stack.setDamage(Math.max(stack.getDamage() - otherStack.getMaxDamage() + otherStack.getDamage(), 0));
-                        otherStack.decrement(1);
-                        return true;
+                if (stack.getItem().canRepair(stack, otherStack) && Quickrepair.getBooleanConfig("do_unit_repair")) {
+                    if (!stack.hasEnchantments() || Quickrepair.getBooleanConfig("unit_repair_enchanted_items")) {
+                        return RepairMethods.unitRepairItem(stack, otherStack, Quickrepair.getDecimalConfig("unit_repair_rate"));
+                    }
+                } else if (stack.getItem() == otherStack.getItem() && Quickrepair.getBooleanConfig("do_item_combine")) {
+                    if (!stack.hasEnchantments() && !otherStack.hasEnchantments()) {
+                        return RepairMethods.combineItems(stack, otherStack, Quickrepair.getDecimalConfig("item_combine_bonus_rate"));
                     }
                 }
             }
-            if (otherStack.getItem() == Items.NAME_TAG && ModConfigs.DO_ITEM_NAMING > 0) {
-                otherStack.decrement(1);
-                stack.setCustomName(otherStack.getName());
-                return true;
+            if (otherStack.getItem() == Items.NAME_TAG && otherStack.hasCustomName() && Quickrepair.getBooleanConfig("do_item_naming")) {
+                return RepairMethods.nameItem(stack, otherStack);
             }
         }
         return false;
