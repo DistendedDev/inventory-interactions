@@ -17,6 +17,7 @@ public class Config {
     public Config(String fileName, HashMap<String, String> defaultFields) {
         File file = FabricLoader.getInstance().getConfigDir().resolve(fileName).toFile();
         try {
+            boolean endsWithEmptyLine = false;
             if (file.createNewFile()) {
                 Quickrepair.log("config file created");
             }
@@ -27,21 +28,23 @@ public class Config {
                 if (config.length == 2 && !line.startsWith("#")) {
                     configs.put(config[0].trim(), config[1].trim());
                 }
+                if (!scanner.hasNextLine()) {
+                    System.out.println(line);
+                    endsWithEmptyLine = true;
+                }
             }
             scanner.close();
             FileWriter writer = new FileWriter(file, true);
             for (String field : defaultFields.keySet()) {
                 if (!configs.containsKey(field)) {
                     configs.put(field, defaultFields.get(field));
+                    writer.write("\n");
                     writer.write(field + "=" + defaultFields.get(field));
                     writer.write("\n");
                     Quickrepair.log("config " + field + " created");
                 }
             }
             writer.close();
-            for ( Map.Entry<String, String> entry : configs.entrySet()) {
-                System.out.println(entry.getKey() + " " + entry.getValue());
-            }
         } catch (Exception e) {
             e.printStackTrace();
         }
