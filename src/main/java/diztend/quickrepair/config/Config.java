@@ -29,11 +29,15 @@ public class Config {
                 }
             }
             scanner.close();
+            boolean flag = false;
             FileWriter writer = new FileWriter(file, true);
             for (String field : defaultFields.keySet()) {
                 if (!configs.containsKey(field)) {
                     configs.put(field, defaultFields.get(field));
-                    writer.write("\n");
+                    if (!flag) {
+                        writer.write("\n");
+                        flag = true;
+                    }
                     writer.write(field + "=" + defaultFields.get(field));
                     writer.write("\n");
                     Quickrepair.log("config " + field + " created");
