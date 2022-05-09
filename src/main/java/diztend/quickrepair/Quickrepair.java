@@ -17,7 +17,7 @@ public class Quickrepair implements ModInitializer {
             .addField("do_item_combine", "true")
             .addField("item_combine_bonus_rate", "0.0")
             .addField("do_item_naming", "true")
-            .addField("custom_recipes", "true")
+            .addField("do_shapeless_crafting", "true")
             .build();
 
     public static boolean getBooleanConfig(String key) {

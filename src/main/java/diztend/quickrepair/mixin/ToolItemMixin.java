@@ -20,7 +20,7 @@ public abstract class ToolItemMixin {
      */
     @Overwrite()
     public boolean onClicked(ItemStack stack, ItemStack otherStack, Slot slot, ClickType clickType, PlayerEntity player, StackReference cursorStackReference) {
-        if (clickType == ClickType.RIGHT){
+        if (clickType == ClickType.RIGHT && !stack.isEmpty() && !otherStack.isEmpty() && !player.getWorld().isClient()){
             if (stack.isDamaged()) {
                 if (stack.getItem().canRepair(stack, otherStack) && Quickrepair.getBooleanConfig("do_unit_repair")) {
                     if (!stack.hasEnchantments() || Quickrepair.getBooleanConfig("unit_repair_enchanted_items")) {
@@ -32,8 +32,11 @@ public abstract class ToolItemMixin {
                     }
                 }
             }
-            if (otherStack.getItem() == Items.NAME_TAG && otherStack.hasCustomName() && Quickrepair.getBooleanConfig("do_item_naming")) {
+            if (otherStack.getItem() == Items.NAME_TAG && otherStack.hasCustomName() && !stack.hasCustomName() && !stack.getItem().equals(Items.NAME_TAG) && Quickrepair.getBooleanConfig("do_item_naming")) {
                 return RepairMethods.nameItem(stack, otherStack);
+            }
+            if (Quickrepair.getBooleanConfig("do_shapeless_crafting") ){
+                return RepairMethods.craftShapeless(stack, otherStack, slot, cursorStackReference, player, player.getWorld());
             }
         }
         return false;
