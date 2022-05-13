@@ -10,7 +10,7 @@
   "contact": {},
   "license": "MIT",
   "icon": "assets/quickrepair/icon.png",
-  "environment": "server",
+  "environment": "*",
   "entrypoints": {
     "main": [
       "diztend.quickrepair.Quickrepair"
