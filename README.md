@@ -1,16 +1,14 @@
 # Quick Repair Mod (Fabric)
 
-A configurable mod that allows you to repair items by right-clicking in the inventory
+A simple, configurable mod that allows you to repair items by right-clicking in the inventory
 
 ### Features
 
+* fully configurable
 * unit repairing
 * item combining
-  * doesn't currently combine enchantments
 * item naming
-* more coming soon...
+* shapeless crafting
+* more comming soon... feel free to suggest!
 
-### Status
-
-* not yet released
-* if you want to test it, please feel free to clone the project yourself
+to be released soon
