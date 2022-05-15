@@ -11,4 +11,4 @@ A simple, configurable mod that allows you to repair items by right-clicking in 
 * shapeless crafting
 * more comming soon... feel free to suggest!
 
-to be released soon
+if you find any issues, please let report it immediately and I will try to fix it ASAP
