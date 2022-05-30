@@ -36,7 +36,12 @@ public abstract class ToolItemMixin {
                 return RepairMethods.nameItem(stack, otherStack);
             }
             if (Quickrepair.getBooleanConfig("do_shapeless_crafting") ){
-                return RepairMethods.craftShapeless(stack, otherStack, slot, cursorStackReference, player, player.getWorld());
+                if (RepairMethods.craftShapeless(stack, otherStack, slot, cursorStackReference, player, player.getWorld())) {
+                    return true;
+                }
+            }
+            if (RepairMethods.smithItems(stack, otherStack, slot, cursorStackReference, player, player.getWorld())) {
+                return true;
             }
         }
         return false;
