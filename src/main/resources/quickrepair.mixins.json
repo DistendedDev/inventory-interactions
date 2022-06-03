@@ -4,6 +4,7 @@
   "package": "diztend.quickrepair.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "PlayerDataSaver",
     "ToolItemMixin"
   ],
   "client": [

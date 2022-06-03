@@ -1,7 +1,13 @@
 package diztend.quickrepair;
 
+import com.mojang.brigadier.CommandDispatcher;
+import diztend.quickrepair.command.QuickRepairConfigCommand;
 import diztend.quickrepair.config.Config;
+import diztend.quickrepair.event.PlayerCopyFromEvent;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
+import net.minecraft.server.command.ServerCommandSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,5 +41,7 @@ public class Quickrepair implements ModInitializer {
 
     @Override
     public void onInitialize() {
+        CommandRegistrationCallback.EVENT.register(QuickRepairConfigCommand::register);
+        ServerPlayerEvents.COPY_FROM.register(new PlayerCopyFromEvent());
     }
 }
