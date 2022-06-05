@@ -1,29 +1,32 @@
 package diztend.quickrepair;
 
-import com.mojang.brigadier.CommandDispatcher;
-import diztend.quickrepair.command.QuickRepairConfigCommand;
+import diztend.quickrepair.command.PlayerConfigCommand;
 import diztend.quickrepair.config.Config;
 import diztend.quickrepair.event.PlayerCopyFromEvent;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
-import net.minecraft.server.command.ServerCommandSource;
+import net.fabricmc.loader.api.FabricLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class Quickrepair implements ModInitializer {
 
     public static String MOD_ID = "quickrepair";
+    public static String MOD_VERSION = FabricLoader.getInstance().getModContainer(MOD_ID).get().getMetadata().getVersion().getFriendlyString();
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
-    private static final Config CONFIG = new Config.Builder(MOD_ID)
-            .addField("do_unit_repair", "true")
-            .addField("unit_repair_enchanted_items", "false")
-            .addField("unit_repair_rate", "0.25")
-            .addField("do_item_combine", "true")
-            .addField("item_combine_bonus_rate", "0.0")
-            .addField("do_item_naming", "true")
-            .addField("do_shapeless_crafting", "true")
+    private static final Config CONFIG = new Config.Builder(MOD_ID + "-" + MOD_VERSION)
+            .addField("unit_repair_default", "true")
+            .addField("unit_repair_enchanted_default", "false")
+            .addField("unit_repair_rate_default", "0.25")
+            .addField("combine_repair_default", "true")
+            .addField("combine_bonus_default", "0.0")
+            .addField("item_naming_default", "false")
+            .addField("shapeless_crafting_default", "false")
+            .addField("smithing_default", "true")
+            .addField("op_config_command", "true")
+            .addField("player_config_command", "false")
             .build();
 
     public static boolean getBooleanConfig(String key) {
@@ -41,7 +44,7 @@ public class Quickrepair implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        CommandRegistrationCallback.EVENT.register(QuickRepairConfigCommand::register);
+        CommandRegistrationCallback.EVENT.register(PlayerConfigCommand::register);
         ServerPlayerEvents.COPY_FROM.register(new PlayerCopyFromEvent());
     }
 }

@@ -9,6 +9,6 @@ public class PlayerCopyFromEvent implements ServerPlayerEvents.CopyFrom {
     public void copyFromPlayer(ServerPlayerEntity oldPlayer, ServerPlayerEntity newPlayer, boolean alive) {
         PlayerDataSaverInterface old = (PlayerDataSaverInterface) oldPlayer;
         PlayerDataSaverInterface player = (PlayerDataSaverInterface) newPlayer;
-        player.setPersistentData(old.getPersistentData());
+        player.setPersistentData(old.getPersistentData().copy());
     }
 }

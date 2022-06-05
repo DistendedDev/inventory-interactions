@@ -1,6 +1,7 @@
 package diztend.quickrepair.mixin;
 
 import diztend.quickrepair.Quickrepair;
+import diztend.quickrepair.util.PlayerDataSaverInterface;
 import diztend.quickrepair.util.RepairMethods;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.StackReference;
@@ -22,7 +23,7 @@ public abstract class ToolItemMixin {
     public boolean onClicked(ItemStack stack, ItemStack otherStack, Slot slot, ClickType clickType, PlayerEntity player, StackReference cursorStackReference) {
         if (clickType == ClickType.RIGHT && !stack.isEmpty() && !otherStack.isEmpty() && !player.getWorld().isClient()){
             if (stack.isDamaged()) {
-                if (stack.getItem().canRepair(stack, otherStack) && Quickrepair.getBooleanConfig("do_unit_repair")) {
+                if (stack.getItem().canRepair(stack, otherStack) && ((PlayerDataSaverInterface) player).getPersistentData().getBoolean("unit_repair")) {
                     if (!stack.hasEnchantments() || Quickrepair.getBooleanConfig("unit_repair_enchanted_items")) {
                         return RepairMethods.unitRepairItem(stack, otherStack, Quickrepair.getDecimalConfig("unit_repair_rate"));
                     }
