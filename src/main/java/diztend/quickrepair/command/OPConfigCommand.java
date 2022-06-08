@@ -52,7 +52,7 @@ public class OPConfigCommand extends ConfigCommand {
         registerBooleanSetting("smithing");
         registerDecimalSetting("unit_repair_rate");
         registerDecimalSetting("combine_bonus");
-        dispatcher.register(CommandManager.literal("quick_repair_op").then(node));
+        dispatcher.register(CommandManager.literal("quick_repair_op").requires(e -> e.hasPermissionLevel(1)).then(node));
     }
 
 }
