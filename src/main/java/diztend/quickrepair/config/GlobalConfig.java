@@ -2,20 +2,18 @@ package diztend.quickrepair.config;
 
 import diztend.quickrepair.Quickrepair;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.nbt.NbtCompound;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Scanner;
 
-public class Config {
+public class GlobalConfig {
 
     private final LinkedHashMap<String, String> configs;
 
-    public Config(String fileName, LinkedHashMap<String, String> defaultFields) {
-        configs = defaultFields;
+    public GlobalConfig(String fileName, LinkedHashMap<String, String> defaultFields) {
+        this.configs = defaultFields;
         File file = FabricLoader.getInstance().getConfigDir().resolve(fileName).toFile();
         try {
             if (file.createNewFile()) {
@@ -27,12 +25,13 @@ public class Config {
                     Quickrepair.log("config " + field + " created");
                 }
                 writer.close();
-            }
-            Scanner scanner = new Scanner(file);
-            while (scanner.hasNextLine()) {
-                String[] line = scanner.nextLine().split("=");
-                if (line.length == 2 && configs.containsKey(line[0])) {
-                    configs.put(line[0], line[1]);
+            } else {
+                Scanner scanner = new Scanner(file);
+                while (scanner.hasNextLine()) {
+                    String[] line = scanner.nextLine().split("=");
+                    if (line.length == 2 && configs.containsKey(line[0])) {
+                        configs.put(line[0], line[1]);
+                    }
                 }
             }
         } catch (Exception e) {
@@ -48,7 +47,6 @@ public class Config {
 
         private final String name;
         private final LinkedHashMap<String, String> configFields = new LinkedHashMap<>();
-
         public Builder(String name) {
             this.name = name;
         }
@@ -58,8 +56,8 @@ public class Config {
             return this;
         }
 
-        public Config build() {
-            return new Config(name + ".txt", configFields);
+        public GlobalConfig build() {
+            return new GlobalConfig(name + ".txt", configFields);
         }
 
     }
