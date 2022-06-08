@@ -28,7 +28,7 @@ public class PlayerConfigCommand extends ConfigCommand{
                         .executes(c -> setDecimal(c, name, DoubleArgumentType.getDouble(c, name)))));
     }
 
-    public static void register(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess registryAccess, Environment environment) {
+    public static void register(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess registry, CommandManager.RegistrationEnvironment environment) {
         Quickrepair.log("registering player command");
         registerBooleanSetting("unit_repair");
         registerBooleanSetting("unit_repair_enchanted");

@@ -6,7 +6,6 @@ import diztend.quickrepair.config.GlobalConfig;
 import diztend.quickrepair.config.PlayerConfig;
 import diztend.quickrepair.event.PlayerCopyFromEvent;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.loader.api.FabricLoader;

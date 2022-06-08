@@ -8,6 +8,7 @@ import com.mojang.brigadier.arguments.DoubleArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.builder.RequiredArgumentBuilder;
 import diztend.quickrepair.Quickrepair;
+import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.command.argument.GameProfileArgumentType;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
@@ -42,7 +43,7 @@ public class OPConfigCommand extends ConfigCommand {
                         })));
     }
 
-    public static void register(CommandDispatcher<ServerCommandSource> dispatcher, boolean dedicated) {
+    public static void register(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess registry, CommandManager.RegistrationEnvironment environment) {
         Quickrepair.log("registering op command");
         registerBooleanSetting("unit_repair");
         registerBooleanSetting("unit_repair_enchanted");
@@ -52,7 +53,7 @@ public class OPConfigCommand extends ConfigCommand {
         registerBooleanSetting("smithing");
         registerDecimalSetting("unit_repair_rate");
         registerDecimalSetting("combine_bonus");
-        dispatcher.register(CommandManager.literal("quick_repair_op").then(node));
+        dispatcher.register(CommandManager.literal("quick_repair_op").requires(p -> p.hasPermissionLevel(1)).then(node));
     }
 
 }
