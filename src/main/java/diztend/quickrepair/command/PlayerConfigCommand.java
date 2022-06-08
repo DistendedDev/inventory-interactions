@@ -5,8 +5,12 @@ import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.brigadier.arguments.DoubleArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import diztend.quickrepair.Quickrepair;
+import net.fabricmc.api.Environment;
+import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
+
+import java.rmi.registry.Registry;
 
 public class PlayerConfigCommand extends ConfigCommand{
 
@@ -24,7 +28,7 @@ public class PlayerConfigCommand extends ConfigCommand{
                         .executes(c -> setDecimal(c, name, DoubleArgumentType.getDouble(c, name)))));
     }
 
-    public static void register(CommandDispatcher<ServerCommandSource> dispatcher, boolean dedicated) {
+    public static void register(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess registryAccess, Environment environment) {
         Quickrepair.log("registering player command");
         registerBooleanSetting("unit_repair");
         registerBooleanSetting("unit_repair_enchanted");

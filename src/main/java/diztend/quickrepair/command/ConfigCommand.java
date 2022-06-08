@@ -5,7 +5,7 @@ import com.mojang.brigadier.context.CommandContext;
 import diztend.quickrepair.config.PlayerDataSaverInterface;
 import net.minecraft.entity.Entity;
 import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.text.LiteralText;
+import net.minecraft.text.Text;
 
 public abstract class ConfigCommand {
 
@@ -21,7 +21,7 @@ public abstract class ConfigCommand {
         PlayerDataSaverInterface player = (PlayerDataSaverInterface) entity;
         if (player == null) return 0;
         player.getQuickRepairData().putBoolean(key, value);
-        c.getSource().sendFeedback(new LiteralText(entity.getName().getString() + " set " + key + " to " + value), true);
+        c.getSource().sendFeedback(Text.literal(entity.getName().getString() + " set " + key + " to " + value), true);
         return Command.SINGLE_SUCCESS;
     }
 
@@ -29,7 +29,7 @@ public abstract class ConfigCommand {
         PlayerDataSaverInterface player = (PlayerDataSaverInterface) entity;
         if (player == null) return 0;
         player.getQuickRepairData().putDouble(key, value);
-        c.getSource().sendFeedback(new LiteralText(entity.getName().getString() + " set " + key + " to " + value), true);
+        c.getSource().sendFeedback(Text.literal(entity.getName().getString() + " set " + key + " to " + value), true);
         return Command.SINGLE_SUCCESS;
     }
 
