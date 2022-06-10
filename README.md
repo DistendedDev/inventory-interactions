@@ -11,4 +11,11 @@ A simple, configurable mod that allows you to repair items by right-clicking in 
 * shapeless crafting
 * more comming soon... feel free to suggest!
 
-if you find any issues, please let report it immediately and I will try to fix it ASAP
+If you find any issues, please let report it immediately and I will try to fix it ASAP
+
+### Downloads
+I will not be releasing the mod on github. 
+
+Instead, I have put it on 2 mod hosting platforms, 
+[curseforge](https://www.curseforge.com/minecraft/mc-mods/quick-repair-mod) and
+[modrinth](https://modrinth.com/mod/quick-repair)
