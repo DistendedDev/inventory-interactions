@@ -11,6 +11,7 @@ A simple, configurable server-side mod that allows you to repair & craft items b
 * item combining
 * item naming
 * shapeless crafting
+* item smithing
 * more comming soon... feel free to suggest!
 
 If you find any issues, please let report it immediately and I will try to fix it ASAP
