@@ -1,5 +1,7 @@
 # Inventory Interactions (Fabric)
 
+*formerly known as **Quick Repair***
+
 A simple, configurable server-side mod that allows you to repair & craft items by right-clicking in the inventory
 
 ![image](https://user-images.githubusercontent.com/94454399/173060365-8f1a8a07-50b9-4435-9acb-8fac1ced4a61.png)
